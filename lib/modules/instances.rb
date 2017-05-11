@@ -18,7 +18,7 @@ class InstancesCleanup < AwsCleanup
   private
 
   def prompt_user(eii)
-    puts "WARNING: The following #{eii.count} instances will be terminated."
+    puts "WARNING: The following #{eii.count} instances will be terminated: #{eii.join(', ')}"
     print 'Are you sure? '
     return if %w(y ye yes).include? gets.strip
     puts 'Aborted'

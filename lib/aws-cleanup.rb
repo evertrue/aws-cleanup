@@ -5,6 +5,7 @@ class AwsCleanup
   TEST_INSTANCE_EXPIRE_AGE = (3_600 * 24).freeze
   TEST_GROUP_ID = 'sg-1e804874'.freeze
   TEST_GROUP_NAME = 'ci-testing'.freeze
+  DELETE_LIMIT = 10
 
   def self.run(resource)
     AwsCleanup.new.run resource

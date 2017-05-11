@@ -6,8 +6,12 @@ class InstancesCleanup < AwsCleanup
   def cleanup_instances
     eii = expired_instances_ids
     if eii.any?
+      if eii.count > DELETE_LIMIT
+        puts "WARNING: Got more than #{DELETE_LIMIT} instances to delete, only doing " \
+          "#{DELETE_LIMIT}"
+      end
       puts 'Deleting instances: ' + eii.join(', ')
-      ec2.terminate_instances instance_ids: eii
+      ec2.terminate_instances instance_ids: eii[0..9]
       return
     end
 

@@ -18,6 +18,8 @@ class InstancesCleanup < AwsCleanup
     puts 'No instances to clean up'
   end
 
+  private
+
   def expired_instances_ids
     expired_instances.map(&:instance_id)
   end

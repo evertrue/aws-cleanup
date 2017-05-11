@@ -15,6 +15,8 @@ class CloudwatchCleanup < AwsCleanup
     puts 'No alarms to clean up'
   end
 
+  private
+
   def orphaned_alarms
     insufficient_data_alarms.select do |alarm|
       alarm.dimensions.any? &&

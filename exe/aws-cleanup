@@ -1,4 +1,4 @@
 require 'rubygems'
 require 'aws-cleanup'
 
-AwsCleanup.run
+AwsCleanup.run ARGV[0]

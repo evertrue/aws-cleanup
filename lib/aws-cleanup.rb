@@ -1,20 +1,27 @@
 require 'aws-cleanup/version'
 require 'aws-sdk'
-require 'cloudwatch-cleanup'
-require 'instances-cleanup'
 
 class AwsCleanup
   TEST_INSTANCE_EXPIRE_AGE = (3_600 * 24).freeze
   TEST_GROUP_ID = 'sg-1e804874'.freeze
   TEST_GROUP_NAME = 'ci-testing'.freeze
 
-  def self.run
-    AwsCleanup.new.run
+  def self.run(resource)
+    AwsCleanup.new.run resource
   end
 
-  def run
-    InstancesCleanup.run
-    CloudWatchCleanup.run
+  def run(resource = nil)
+    if resource
+      require "#{resource}-cleanup"
+      AwsCleanup.const_get("#{resource.capitalize}Cleanup").run
+      return
+    end
+
+    Dir.glob(File.dirname(File.absolute_path __FILE__) + '/modules/*').each do |resource_file|
+      require resource_file
+      class_name = "#{File.basename(resource_file).sub('.rb', '').capitalize}Cleanup"
+      AwsCleanup.const_get(class_name).run
+    end
   end
 
   private

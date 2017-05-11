@@ -1,6 +1,6 @@
-class CloudWatchCleanup < AwsCleanup
+class CloudwatchCleanup < AwsCleanup
   def self.run
-    CloudWatchCleanup.new.cleaup_alarms
+    CloudwatchCleanup.new.cleaup_alarms
   end
 
   def cleaup_alarms
@@ -8,7 +8,7 @@ class CloudWatchCleanup < AwsCleanup
 
     if oa.any?
       puts 'Deleting alarms: ' + oa.join(', ')
-      cloudwatch.delete_alarms alarm_names: oa
+      # cloudwatch.delete_alarms alarm_names: oa
       return
     end
 

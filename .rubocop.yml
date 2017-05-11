@@ -6,3 +6,6 @@ MethodLength:
 
 AbcSize:
   Max: 30
+
+Documentation:
+  Enabled: false

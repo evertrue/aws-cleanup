@@ -7,7 +7,7 @@ class InstancesCleanup < AwsCleanup
     eii = expired_instances_ids
     if eii.any?
       puts 'Deleting instances: ' + eii.join(', ')
-      # ec2.terminate_instances instance_ids: eii
+      ec2.terminate_instances instance_ids: eii
       return
     end
 

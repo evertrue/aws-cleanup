@@ -8,7 +8,7 @@ class CloudwatchCleanup < AwsCleanup
 
     if oa.any?
       puts 'Deleting alarms: ' + oa.join(', ')
-      # cloudwatch.delete_alarms alarm_names: oa
+      cloudwatch.delete_alarms alarm_names: oa
       return
     end
 

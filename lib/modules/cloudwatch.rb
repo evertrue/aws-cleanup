@@ -1,9 +1,9 @@
 class CloudwatchCleanup < AwsCleanup
   def self.run
-    CloudwatchCleanup.new.cleaup_alarms
+    CloudwatchCleanup.new.cleanup_alarms
   end
 
-  def cleaup_alarms
+  def cleanup_alarms
     oa = orphaned_alarms.map(&:alarm_name)
 
     if oa.any?
